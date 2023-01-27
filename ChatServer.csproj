@@ -8,4 +8,8 @@
     <DockerfileContext>..\Tamboliya</DockerfileContext>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tamboliya\TamboliyaLibrary\TamboliyaLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

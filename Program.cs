@@ -1,6 +1,5 @@
 using ChatServer.Hubs;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using TamboliyaLibrary.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
@@ -9,9 +8,10 @@ builder.Services.AddCors();
 
 
 var app = builder.Build();
-
+//TODO: помилка при доступ≥ до хабу з мобвльного. «м≥нити налашьуванн€ урла, щоб був доступний по докальному айп≥шнику
+var webApiServerPath = builder.Configuration[SolutionPathes.WebApiServer]!;
 app.UseCors(policy =>
-    policy.WithOrigins("https://localhost:7147")
+    policy.WithOrigins("https://localhost:7147", webApiServerPath)
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
@@ -20,8 +20,8 @@ app.UseCors(policy =>
 
 if (!app.Environment.IsDevelopment())
 {
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
