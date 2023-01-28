@@ -8,10 +8,10 @@ builder.Services.AddCors();
 
 
 var app = builder.Build();
-//TODO: помилка при доступ≥ до хабу з мобвльного. «м≥нити налашьуванн€ урла, щоб був доступний по докальному айп≥шнику
+
 var webApiServerPath = builder.Configuration[SolutionPathes.WebApiServer]!;
 app.UseCors(policy =>
-    policy.WithOrigins("https://localhost:7147", webApiServerPath)
+    policy.WithOrigins("https://localhost:7148", webApiServerPath)
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
