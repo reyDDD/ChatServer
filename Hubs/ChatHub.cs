@@ -29,12 +29,17 @@ namespace ChatServer.Hubs
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, $"{channel}_audio_video");
             var clientsOthersInGroup = Clients.OthersInGroup($"{channel}_audio_video");
+
+            //TODO: зачем этот метод ниже, если я нигде не обрабатываю этот метод из хаба на клиенте?
             await clientsOthersInGroup.SendAsync("Join", Context.ConnectionId);
         }
+
+        // пользователь удаляется из группы и уведомляет об этом других участников
         public async Task Leave(string channel)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"{channel}_audio_video");
             await Clients.OthersInGroup(channel).SendAsync("Leave", Context.ConnectionId);
+            //TODO: а если все пользователи вішли из группы, что делать с этой группой? Может стоит удалять? Или группу на 100% нужно удалить, когда игра заканчивается? Как удалить группу?
         }
         public async Task SignalWebRtc(string channel, string type, string payload)
         {
