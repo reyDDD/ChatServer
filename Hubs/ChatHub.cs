@@ -41,9 +41,9 @@ namespace ChatServer.Hubs
             await Clients.OthersInGroup(channel).SendAsync("Leave", Context.ConnectionId);
             //TODO: а если все пользователи вішли из группы, что делать с этой группой? Может стоит удалять? Или группу на 100% нужно удалить, когда игра заканчивается? Как удалить группу?
         }
-        public async Task SignalWebRtc(string channel, string type, string payload)
+        public async Task SignalWebRtc(string channel, string type, string payload, string gameId)
         {
-            await Clients.OthersInGroup($"{channel}_audio_video").SendAsync("SignalWebRtc", channel, type, payload);
+            await Clients.OthersInGroup($"{channel}_audio_video").SendAsync("SignalWebRtc", channel, type, payload, gameId);
         }
     }
 }
