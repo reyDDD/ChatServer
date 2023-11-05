@@ -37,9 +37,9 @@ namespace ChatServer.Hubs
         // пользователь удаляется из группы и уведомляет об этом других участников
         public async Task Leave(string channel)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"{channel}_audio_video");
-            await Clients.OthersInGroup($"{channel}_audio_video").SendAsync("Leave", Context.ConnectionId);
+            await Clients.OthersInGroup($"{channel}_audio_video").SendAsync("Leave", channel);
             //TODO: а если все пользователи вішли из группы, что делать с этой группой? Может стоит удалять? Или группу на 100% нужно удалить, когда игра заканчивается? Как удалить группу?
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"{channel}_audio_video");
         }
         public async Task SignalWebRtc(string channel, string type, string payload, string gameId)
         {
